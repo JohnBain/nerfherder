@@ -19,19 +19,35 @@ datingModule.factory('peopleService', function($http) {
     };
 });
 
+
+datingModule.factory('oneUserService', function($http) {
+    var oneUser = function(user) {
+        return $http({
+            method: 'GET',
+            url: '/users/:' + user
+        })
+    };
+
+    return {
+        user: function(user) {
+            return oneUser(user)
+        }
+    }
+
+});
+
 //defining a service which depends on our peopleService that returns a list of tags
 //aborted, but keeping code to show how to include a dependency on another service
 
 datingModule.factory('tagService', ['peopleService', function(peopleService) {
-    var getTags = function(callbackFn){
-    	peopleService.users().success(function(data){
-    		callbackFn(data)
-    	})
+    var getTags = function(callbackFn) {
+        peopleService.users().success(function(data) {
+            callbackFn(data)
+        })
     };
 
     return {
-    	getTags: getTags
+        getTags: getTags
     }
 
 }]);
-

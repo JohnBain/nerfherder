@@ -11,7 +11,8 @@ var jwt  = require('jwt-simple');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-/*var signup = require('./routes/signup');*/
+var signup = require('./routes/signup');
+var profile = require('./routes/profile')
 
 var app = express();
 
@@ -30,7 +31,8 @@ app.use("/public", express.static(path.join(__dirname, '/public')));
 
 app.use('/', routes);
 app.use('/users', users);
-/*app.use('/signup', signup)*/
+app.use('/signup', signup);
+app.use('/profile', profile);
 
 
 // catch 404 and forward to error handler
