@@ -5,19 +5,7 @@
     angular.
     module('datingApp', ['core', 'datingApp.services', 'ngResource']).
     component('peopleList', {
-        template: `I want to meet <select name="singleSelect" ng-model="data.singleSelect">
-      <option value="Men">Men</option>
-      <option value="Women">Women</option>
-    </select> interested in: <input ng-model="tag" />
-        <div class="col-md-offset-1">
-        <ul class="list-inline"> 
-        <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag">
-        <img src="{{person.img_resources[0]}}"/ class="thumbnail" alt="Oops">
-        <span>{{person.username}}</span>
-        <p>{{person.age}}/{{person.gender}}</p>
-        <ul class="list-inline "><li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li><p>...and {{person.tags.length}} more</p></ul>
-        </li> 
-        </ul>`,
+        templateUrl: '/public/templates/peoplelist.html',
         controller: function populatePeopleController($scope, peopleService) {
             var that = this;
             peopleService.users().then(function success(response) {
@@ -27,19 +15,11 @@
         }
     }).
     component('popularTags', {
-        template: `<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-        <ul class="nav navbar-nav">
-      <li><a href="#">Popular Tags:</a></li>
-      <li ng-repeat="tag in tags">
-               <a href="#"> {{ tag }} </a href="#">
-       </li>
-  </div>
-  </nav>`,
+        templateUrl: '/public/templates/populartags.html',
 
         controller: function populateTags($scope, peopleService) {
             $scope.tags = [];
-            //canonically, promises ought to be resolved in the controllers. So we do so here
+            //peopleService delivers a promise we resolve in the controllers.
 
             peopleService.users().then(function success(response) {
                 var x = response.data;
@@ -48,25 +28,111 @@
                         //let's get the top 5 then a link to see all other tags on the site
                         if ($scope.tags.indexOf(tag) === -1)
                             $scope.tags.push(tag);
-                    })
-                })
-
-
-            })
+                    });
+                });
+            });
         }
-    }).
-    component('userProfile', {
-        template: '<p> {{ user.username}} </p>',
-        controller: function dummyCtrl($scope, $location, oneUserService) {
+    }).component('userProfile', {
+        templateUrl: '/public/templates/profile.html',
+        controller: function profileCtrl($scope, $location, oneUser) {
 
-            //a ridiculous approach vs. ngRoute, but I was curious about $location & $resource
+            //less "Angular" than ngRoute, but this isn't an SPA and I was curious about $location & $resource
 
             var url = $location.$$absUrl;
             console.log(url);
             var lastElement = url.replace(/(.*)([\\\/][^\\\/]*$)/, "$2").slice(1);
-            oneUserService.user(lastElement).then(function(success){
-                $scope.user = success.data;
-            })
-            
+
+            var entry = oneUser.get({ username: lastElement }, function(succ) {
+                $scope.user = succ;
+            });
+
+        }
+    }).
+    component('signupForm', {
+        templateUrl: '/public/templates/signup.html',
+        controller: function signupCtrl($scope) {
+            //using an immediate function to generate ages 18-99
+            $scope.ages = (function() {
+                var arr = [];
+                for (i = 18; i <= 99; i++) {
+                    arr.push(i);
+                }
+                return arr
+            }());
+
+            $scope.formInfo = {};
+            $scope.textfield = "";
+            $scope.badLocation = "";
+            $scope.goodLocation = "";
+
+            var checkLoc = function(loc) {
+                if (loc.length === 0) {
+                    $scope.badLocation = "No location found"
+                }
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ "address": $scope.textfield }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+                        var location = results[0].geometry.location;
+                        $scope.formInfo.Location = location
+
+                    } else {
+                        console.log(results, 'bad results', status, 'bad status');
+                        $scope.badLocation = "Failed"
+                    }
+                })
+            }
+
+
+            var tellLoc = function(loc) {
+                var geocoder = new google.maps.Geocoder();
+                var latlng = $scope.formInfo.Location
+                geocoder.geocode({ 'latLng': latlng }, function(results, status) {
+                    console.log(results, 'here are results of reverse geocode')
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                            $scope.goodLocation = results[1].formatted_address;
+                            console.log($scope.goodLocation)
+                        } else {
+                            $scope.goodLocation = 'Location not found';
+                        }
+                    } else {
+                        $scope.goodLocation = 'Geocoder failed due to: ' + status
+                    }
+                });
+            }
+
+
+
+            $scope.saveData = function() {
+                $scope.nameRequired = '';
+                $scope.passwordRequired = '';
+                $scope.ageRequired = '';
+                $scope.genderRequired = '';
+                $scope.badLocation = '';
+
+
+                checkLoc($scope.textfield);
+                tellLoc($scope.textfield);
+
+                if (!$scope.formInfo.Name) {
+                    $scope.nameRequired = 'Username Required';
+                } else if ($scope.formInfo.Name.length < 3) {
+                    $scope.nameRequired = 'Username Must Be At Least 3 Characters';
+                }
+
+                if (!$scope.formInfo.Password) {
+                    $scope.passwordRequired = 'Password Required';
+                }
+
+                if (!$scope.formInfo.Age) {
+                    $scope.ageRequired = 'Age Required';
+                }
+
+                if (!$scope.formInfo.Gender) {
+                    $scope.genderRequired = 'Gender Required';
+                }
+
+            };
+
         }
     })

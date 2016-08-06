@@ -19,21 +19,23 @@ datingModule.factory('peopleService', function($http) {
     };
 });
 
-
-datingModule.factory('oneUserService', function($http) {
-    var oneUser = function(user) {
+datingModule.factory('tagService', function($http){
+    var tagList = function(){
         return $http({
             method: 'GET',
-            url: '/users/:' + user
+            url: '/users/tags'
         })
     };
-
     return {
-        user: function(user) {
-            return oneUser(user)
+        tags: function() {
+            return tagList();
         }
     }
+});
 
+
+datingModule.factory('oneUser', function($resource) {
+  return $resource('/users/:username'); // Note the full endpoint address
 });
 
 //defining a service which depends on our peopleService that returns a list of tags

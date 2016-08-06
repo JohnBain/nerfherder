@@ -1,0 +1,74 @@
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="inputName3" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+            <input class="form-control" placeholder="Name" ng-model="formInfo.Name">
+            <span ng-show="nameRequired">{{nameRequired}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" placeholder="Password" ng-model="formInfo.Password">
+            <span ng-show="passwordRequired">{{passwordRequired}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputGender3" class="col-sm-2 control-label">Gender</label>
+        <div class="col-sm-4">
+            <input class="form-control" placeholder="Gender" ng-model="formInfo.Gender">
+            <span ng-show="genderRequired">{{genderRequired}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputAge3" class="col-sm-2 control-label">Age</label>
+        <div class="col-sm-4">
+            <select ng-model="formInfo.Age" ng-options="x for x in ages">
+            </select>
+            <span ng-show="ageRequired">{{ageRequired}}</span>
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        <label for="inputName3" class="col-sm-2 control-label">Location</label>
+        <div class="col-sm-4">
+            <input class="form-control" placeholder="Location" ng-model="textfield">
+                        <span ng-show="badLocation">{{ badLocation }}</span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success" ng-click="saveData()">Sign up</button>
+        </div>
+    </div>
+    <span>{{formInfo}}</span>
+    {{ goodLocation }}
+</form>
+
+<!--
+{
+_id: "579f84db53de59bb375c3f9e",
+username: "surfer_guy",
+password: "$2a$10$UNgT7yVE/gcy05p/HM3JR.NQkEtTlHGjXhgctep.eQYJ1xnRCfdmi",
+gender: "M",
+location_info: {
+lat: 150,
+long: 160
+},
+about: "Just a guy",
+what_im_doing: "Working",
+miscellaneous_nerdery: "I love Hot Pockets",
+age: 25,
+__v: 0,
+img_resources: [
+"public/images/man2.jpg"
+],
+tags: [
+"Warhammer",
+"D&D"
+]
+},
+-->

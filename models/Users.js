@@ -31,6 +31,7 @@ var userSchema = new mongoose.Schema({
 });
 
 //"pre" is a middleware affecting the save function.
+//All we're doing here is encrypting the password given to us in the signup form.
 
 userSchema.pre('save', function (next) {
     var user = this;
@@ -51,6 +52,8 @@ userSchema.pre('save', function (next) {
         return next();
     }
 });
+
+//we will use this to de-hash the password given at login and check if it matches
 
 userSchema.methods.comparePassword = function (passw, cb) {
     bcrypt.compare(passw, this.password, function (err, isMatch) {

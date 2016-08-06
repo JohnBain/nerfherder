@@ -1,0 +1,18 @@
+I want to meet
+<select name="singleSelect" ng-model="data.singleSelect">
+    <option value="Men">Men</option>
+    <option value="Women">Women</option>
+</select> interested in:
+<input ng-model="tag" />
+<div class="col-md-offset-1">
+    <ul class="list-inline">
+        <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag">
+            <img src="{{person.img_resources[0]}}" / class="thumbnail" alt="Oops">
+            <span>{{person.username}}</span>
+            <p>{{person.age}}/{{person.gender}}</p>
+            <ul class="list-inline ">
+                <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>
+                <p>...and {{person.tags.length}} more</p>
+            </ul>
+        </li>
+    </ul>

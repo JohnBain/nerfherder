@@ -11,7 +11,6 @@ var passport = require('passport');
 mongoose.connect('mongodb://localhost/users');
 
 router.get('/', function(req, res, next) {
-    console.log("GET worked")
     User.find(function(err, users) {
         if (err) {
             console.log(err);
@@ -21,15 +20,35 @@ router.get('/', function(req, res, next) {
     });
 });
 
+//build tag list
+
+router.get('/tags', function(req, res) {
+    User.find(function(err, users) {
+        if (err){
+            console.error(err);
+        }
+        else {
+            var tags = [],
+            count = {};
+            //build array of every tag
+            users.forEach(s => s.tags.forEach(t => tags.push(t)));
+            //build object chronicling count of each tag
+            tags.forEach(t => count.hasOwnProperty(t) ? count[t] += 1 : count[t] = 1)
+            res.json(count)
+        }
+    })
+})
+
+//find by username
+
 router.get('/:username', function(req, res) {
-    console.log(req.params.username.slice(1))
-    User.findOne({username: req.params.username.slice(1)}, function(err, result) {
+    User.findOne({username: req.params.username}, function(err, result) {
         if (err) {
             res.status(500)
             console.log("err triggered")
             res.send(err)
         } else {
-            console.log(result)
+            console.log(result, 'here')
             res.send(result)
         }
     })
