@@ -8,7 +8,7 @@ I want to meet
     <ul class="list-inline">
         <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag">
             <img src="{{person.img_resources[0]}}" / class="thumbnail" alt="Oops">
-            <span>{{person.username}}</span>
+            <span><a href='profile/{{person.username}}'>{{person.username}}</a></span>
             <p>{{person.age}}/{{person.gender}}</p>
             <ul class="list-inline ">
                 <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>

@@ -10,7 +10,7 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    } ,
+    },
     gender: {
         type: String,
         required: true,
@@ -26,21 +26,22 @@ var userSchema = new mongoose.Schema({
     img_resources: Array,
     location_info: Object,
     about: String,
-    what_im_doing: String,
-    miscellaneous_nerdery: String
+    im_doing: String,
+    miscellaneous_nerdery: String,
+    created_on: {type: Date, default: Date.now}
 });
 
 //"pre" is a middleware affecting the save function.
 //All we're doing here is encrypting the password given to us in the signup form.
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', function(next) {
     var user = this;
     if (this.isModified('password') || this.isNew) {
-        bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.genSalt(10, function(err, salt) {
             if (err) {
                 return next(err);
             }
-            bcrypt.hash(user.password, salt, function (err, hash) {
+            bcrypt.hash(user.password, salt, function(err, hash) {
                 if (err) {
                     return next(err);
                 }
@@ -53,10 +54,20 @@ userSchema.pre('save', function (next) {
     }
 });
 
+//lowercase tags
+
+userSchema.pre('save', function(next) {
+    var user = this;
+    var x = user.tags.map(t => t.toLowerCase());
+    console.log(x);
+    user.tags = x;
+    next();
+})
+
 //we will use this to de-hash the password given at login and check if it matches
 
-userSchema.methods.comparePassword = function (passw, cb) {
-    bcrypt.compare(passw, this.password, function (err, isMatch) {
+userSchema.methods.comparePassword = function(passw, cb) {
+    bcrypt.compare(passw, this.password, function(err, isMatch) {
         if (err) {
             return cb(err);
         }

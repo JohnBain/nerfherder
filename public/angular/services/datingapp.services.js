@@ -23,7 +23,7 @@ datingModule.factory('tagService', function($http){
     var tagList = function(){
         return $http({
             method: 'GET',
-            url: '/users/tags'
+            url: '/users/tags/fiverandom'
         })
     };
     return {
@@ -38,18 +38,9 @@ datingModule.factory('oneUser', function($resource) {
   return $resource('/users/:username'); // Note the full endpoint address
 });
 
-//defining a service which depends on our peopleService that returns a list of tags
-//aborted, but keeping code to show how to include a dependency on another service
+//since services are lazily instantiated it's not a big deal that I have so many
 
-datingModule.factory('tagService', ['peopleService', function(peopleService) {
-    var getTags = function(callbackFn) {
-        peopleService.users().success(function(data) {
-            callbackFn(data)
-        })
-    };
+datingModule.factory('saveUser', function($resource) {
+  return $resource('/users/signup'); 
+});
 
-    return {
-        getTags: getTags
-    }
-
-}]);

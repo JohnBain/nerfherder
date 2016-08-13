@@ -1,1 +1,1 @@
-angular.module('datingApp', ['core', 'datingApp.services'])
+angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAutocomplete'])

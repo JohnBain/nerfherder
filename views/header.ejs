@@ -12,7 +12,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
@@ -33,13 +33,20 @@
 
 <!-- my scripts -->
 
-<script src="../public/angular/core.module.js"></script>
-<script src="../public/angular/tag.filter.js"></script>
-
 <script src="../public/angular/custom.js"></script>
+<script src="../public/angular/core.module.js"></script>
+<script src="../public/angular/services/datingapp.services.js"></script>
 
-<script src="../public/angular/people-list.component.js"></script>
-<script src="../public/angular/tag.service.js"></script>
+<!--Autocomplete stuff-->
+<script src="../public/angular/thirdparty/autocomplete.js"></script>
+<!-- -->
+
+<script src="../public/angular/components/people.list.component.js"></script>
+<script src="../public/angular/components/user.profile.component.js"></script>
+<script src="../public/angular/components/signup.form.component.js"></script>
+<script src="../public/angular/components/popular.tags.component.js"></script>
+
+<script src="../public/angular/filters/tag.filter.js"></script>
 
 
 

@@ -24,17 +24,49 @@ router.get('/', function(req, res, next) {
 
 router.get('/tags', function(req, res) {
     User.find(function(err, users) {
-        if (err){
+        if (err) {
             console.error(err);
-        }
-        else {
+        } else {
             var tags = [],
-            count = {};
+                count = {};
             //build array of every tag
             users.forEach(s => s.tags.forEach(t => tags.push(t)));
-            //build object chronicling count of each tag
-            tags.forEach(t => count.hasOwnProperty(t) ? count[t] += 1 : count[t] = 1)
-            res.json(count)
+            //build object chronicling count of each tag -- UNUSED
+            tags.forEach(t => count.hasOwnProperty(t) ? count[t] += 1 : count[t] = 1);
+            res.json(tags);
+        }
+    })
+})
+
+router.get('/tags/fiverandom', function(req, res) {
+    User.find(function(err, users) {
+        if (err) {
+            console.error(err);
+        } else {
+            var tags = [],
+                count = {};
+            //build array of every tag
+            users.forEach(s => s.tags.forEach(t => tags.push(t)));
+            var fiveRand = [];
+            var counter = 0;
+            var tries = 30;
+            //failsafe in case there are less than 5 tags
+
+            function pushFive() {
+                while (counter < 5 && tries > 0) {
+                    tries -= 1;
+                    var x = tags[Math.floor(Math.random() * tags.length)].toLowerCase();
+                    if (fiveRand.indexOf(x) != -1) {
+                        pushFive();
+                    } else {
+                        counter += 1;
+                        fiveRand.push(x)
+                    }
+                }
+            }
+            
+            pushFive();
+            res.json(fiveRand);
         }
     })
 })
@@ -42,7 +74,7 @@ router.get('/tags', function(req, res) {
 //find by username
 
 router.get('/:username', function(req, res) {
-    User.findOne({username: req.params.username}, function(err, result) {
+    User.findOne({ username: req.params.username }, function(err, result) {
         if (err) {
             res.status(500)
             console.log("err triggered")
@@ -71,25 +103,36 @@ router.delete('/', function(req, res) {
 
 
 router.post('/signup', function(req, res) {
-    if (!req.body.username || !req.body.password) {
+    console.log("successfully got in");
+    /*this hack allows us to bypass Angular's POST handling*/
+    var newObj = {};
+    Object.keys(req.body).forEach(e=>newObj = JSON.parse(e));
+
+    /*if (!req.body.username || !req.body.password) {
+        
         res.json({ success: false, msg: 'Please pass name and password.' });
-    } else {
-        var newUser = new User(req.body);
+    } else {*/
+        /*var newUser = new User(req.body);*/
+        var newUser = new User(newObj);
+
+        //newUser does not work
 
         //x-www-form-urlencoded -- JSON parses may not be necessary when sending via form
-
+/*
         newUser.location_info = JSON.parse(newUser.location_info)
         newUser.img_resources = JSON.parse(newUser.img_resources)
-        newUser.tags = JSON.parse(newUser.tags)
+        newUser.tags = JSON.parse(newUser.tags)*/
 
         // save the user
         newUser.save(function(err) {
             if (err) {
+                console.log("fucked up on save");
                 return res.json({ success: false, msg: 'Username already exists.' });
             }
+            console.log("yay");
             res.json({ success: true, msg: 'Successfully created new user.' });
         });
-    }
+    /*} //end of else */
 });
 
 router.get('/memberinfo', passport.authenticate('jwt', { session: false }), function(req, res) {
