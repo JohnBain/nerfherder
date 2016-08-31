@@ -104,18 +104,18 @@ router.delete('/', function(req, res) {
 
 router.post('/signup', function(req, res) {
     console.log("successfully got in");
-    /*this hack allows us to bypass Angular's POST handling*/
-    var newObj = {};
-    Object.keys(req.body).forEach(e=>newObj = JSON.parse(e));
+    console.log(req.body, 'here is object');
+    //this hack allows us to bypass Angular's POST handling
+    //var newObj = {};
+    //Object.keys(req.body).forEach(e=>newObj = JSON.parse(e));
 
-    /*if (!req.body.username || !req.body.password) {
-        
+    //console.log(newObj, 'here is new object')
+
+    if (!req.body.username || !req.body.password) {
+        console.log('validation error');
         res.json({ success: false, msg: 'Please pass name and password.' });
-    } else {*/
-        /*var newUser = new User(req.body);*/
-        var newUser = new User(newObj);
-
-        //newUser does not work
+    } else {
+        var newUser = new User(req.body);
 
         //x-www-form-urlencoded -- JSON parses may not be necessary when sending via form
 /*
@@ -126,13 +126,12 @@ router.post('/signup', function(req, res) {
         // save the user
         newUser.save(function(err) {
             if (err) {
-                console.log("fucked up on save");
+                console.log(err, 'error on save');
                 return res.json({ success: false, msg: 'Username already exists.' });
             }
-            console.log("yay");
             res.json({ success: true, msg: 'Successfully created new user.' });
         });
-    /*} //end of else */
+    }
 });
 
 router.get('/memberinfo', passport.authenticate('jwt', { session: false }), function(req, res) {

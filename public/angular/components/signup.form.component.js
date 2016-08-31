@@ -1,6 +1,6 @@
 angular.module('datingApp').component('signupForm', {
     templateUrl: '/public/templates/signup.html',
-    controller: function signupCtrl($scope, $http, saveUser) {
+    controller: function signupCtrl($scope, $http) {
         //using an immediate function to generate ages 18-99
         $scope.ages = (function() {
             var arr = [];
@@ -10,7 +10,10 @@ angular.module('datingApp').component('signupForm', {
             return arr
         }());
 
+
         $scope.formInfo = {};
+
+        $scope.formInfo.tags = ["asd"]
 
 
         $scope.saveData = function() {
@@ -18,10 +21,8 @@ angular.module('datingApp').component('signupForm', {
             $scope.passwordRequired = '';
             $scope.ageRequired = '';
             $scope.genderRequired = '';
-            var lat = $scope.details.geometry.location.lat()
-            var long = $scope.details.geometry.location.lng()
             $scope.formInfo.img_resources = ["public/images/woman1.jpg"];
-            $scope.formInfo.location_info = { lat: lat, long: long }
+            $scope.formInfo.location_info = { lat: $scope.details.geometry.location.lat(), long: $scope.details.geometry.location.lng() }
 
             /*var myTags = $scope.formInfo.tags.split(",").map(t => t = t.trim())*/
 
@@ -46,21 +47,28 @@ angular.module('datingApp').component('signupForm', {
 
             /*if ($scope.formInfo.location) {*/
             var x = $scope.formInfo;
-            var ary = [];
-            ary.push(x.tags);
-            x.tags = ary;
 
 
             console.log(x);
             var req = {
                 method: 'POST',
                 url: '/users/signup',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
                 data: x
             }
-            $http.defaults.transformResponse = [];
+
+            /*
+
+            transformRequest: function(obj) {
+                    var str = [];
+                    for (var p in obj) {
+                        if (p === 'location_info') {
+                            Object.keys(obj['location_info']).forEach(p => str.push('location_info[' + encodeURIComponent(p) + ']' + "=" + encodeURIComponent(obj['location_info'][p])));
+                        } else
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    }
+                    return str.join("&");
+                },*/
+
             $http(req).then(function() { console.log("user saved") }, function() { console.log("failure") });
 
             /*}*/
