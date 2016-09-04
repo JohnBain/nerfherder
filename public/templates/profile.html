@@ -10,10 +10,10 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src= '../{{user.img_resources[0]}}' alt="Chania">
+      <img src= '../public/images/man.jpg' alt="Chania">  
     </div>
 
-    <!--       <img src= '../public/images/man.jpg' alt="Chania"> -->
+    <!--        -->
 
     <div class="item">
       <img src="img_chania2.jpg" alt="Chania">
@@ -39,6 +39,10 @@
   </a>
 </div>
 
-<p> {{ user.what_im_doing }}</p>
+<p><strong>About me:</strong> {{ user.about }}</p>
+<p> <strong>What I'm doing:</strong> {{ user.what_im_doing }}</p>
+<p><strong>Miscellaneous nerdery:</strong> {{ user.miscellaneous_nerdery }}</p>
+<p> <strong>My tags:</strong> <ul><li ng-repeat="tag in user.tags">{{ tag }}</li></ul></p>
+
 <my-position></my-position>
 

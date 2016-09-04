@@ -1,6 +1,6 @@
 angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAutocomplete', 'ui.router'])
 
-.config(function($stateProvider, $urlRouterProvider) {
+/*.config(function($stateProvider, $urlRouterProvider) {
     
     $urlRouterProvider.otherwise('/home');
     
@@ -20,3 +20,4 @@ angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAuto
         
 });
 
+*/
