@@ -25,9 +25,7 @@ var userSchema = new mongoose.Schema({
     tags: Array,
     img_resources: Array,
     location_info: Object,
-    about: String,
-    im_doing: String,
-    miscellaneous_nerdery: String,
+    bio: String,
     created_on: {type: Date, default: Date.now}
 });
 
