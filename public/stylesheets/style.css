@@ -12,8 +12,8 @@ ul#tags li {
 }
 
 .btn-primary {
-    background: #ff6600;
-    border-color: #ff751a;
+    background: #4fc5d0;
+    border-color: #4fc5d0;
     color: white;
 }
 
@@ -22,19 +22,31 @@ ul#tags li {
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-    background: #ff6600;
+    background: #2b97a1;
 }
 
 .btn-primary:active,
 .btn-primary.active {
-    background: #ff6600;
-    box-shadow: none;
+    background: #2b97a1;
+    box-shadow: 1px;
 }
 
 .thumbnail {
     height: 200px;
     width: 200px;
 }
+
+.meet-div {
+	background-color: #104da1;
+	color: #e4edfd;
+	width: 30em;
+	border-radius: .3em;
+}
+
+.col-md-4 {
+	background-color: black;
+}
+
 
 body {
     font-family: "Helvetica Neue", "Helvetica", "Sans Serif"

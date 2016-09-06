@@ -32,7 +32,28 @@ router.get('/tags', function(req, res) {
             //build array of every tag
             users.forEach(s => s.tags.forEach(t => tags.push(t)));
             //build object chronicling count of each tag -- UNUSED
-            tags.forEach(t => count.hasOwnProperty(t) ? count[t] += 1 : count[t] = 1);
+            /*tags.forEach(t => count.hasOwnProperty(t) ? count[t] += 1 : count[t] = 1);*/
+            res.json(tags);
+        }
+    })
+});
+
+//for autocomplete component -- build tags list, culling non-unique tags
+
+router.get('/tags/uniquetags', function(req, res) {
+    //I realize now all this 'heavy lifting' should be on client side
+    User.find(function(err, users) {
+        if (err) {
+            console.error(err)
+        } else {
+            var tags = [];
+            users.forEach(function(u) {
+                u.tags.forEach(function(t) {
+                    if (tags.indexOf(t) === -1) {
+                        tags.push(t);
+                    }
+                })
+            });
             res.json(tags);
         }
     })
@@ -64,7 +85,7 @@ router.get('/tags/fiverandom', function(req, res) {
                     }
                 }
             }
-            
+
             pushFive();
             res.json(fiveRand);
         }
@@ -118,10 +139,10 @@ router.post('/signup', function(req, res) {
         var newUser = new User(req.body);
 
         //x-www-form-urlencoded -- JSON parses may not be necessary when sending via form
-/*
-        newUser.location_info = JSON.parse(newUser.location_info)
-        newUser.img_resources = JSON.parse(newUser.img_resources)
-        newUser.tags = JSON.parse(newUser.tags)*/
+        /*
+                newUser.location_info = JSON.parse(newUser.location_info)
+                newUser.img_resources = JSON.parse(newUser.img_resources)
+                newUser.tags = JSON.parse(newUser.tags)*/
 
         // save the user
         newUser.save(function(err) {

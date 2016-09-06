@@ -1,25 +1,6 @@
-angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAutocomplete', 'ui.router', 'autocomplete'])
+angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAutocomplete', 'ui.router', 'autocomplete', 'ui.bootstrap'])
 
 .config(function($stateProvider) {
-
-    var modalState = {
-        name: 'modal',
-        views: {
-            "modal": {
-                templateUrl: "modals/modal.html"
-            }
-        },
-        abstract: true
-    };
-
-    modalState.login = {
-        views: {
-            "modal": {
-                templateUrl: "modals/login.html"
-            }
-        }
-    };
-
 
     var signupState = {
         name: 'signup',
@@ -47,7 +28,7 @@ angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAuto
 
     $stateProvider.state(homeState);
     $stateProvider.state(signupState);
-    $stateProvider.state(modalState);
     $stateProvider.state(helloState);
     $stateProvider.state(aboutState);
+
 });

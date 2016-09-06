@@ -33,6 +33,20 @@ datingModule.factory('tagService', function($http){
     }
 });
 
+datingModule.factory('uniqueTagService', function($http){
+    var tagList = function(){
+        return $http({
+            method: 'GET',
+            url: '/users/tags/uniquetags'
+        })
+    };
+    return {
+        tags: function() {
+            return tagList();
+        }
+    }
+});
+
 
 datingModule.factory('oneUser', function($resource) {
   return $resource('/users/:username'); // Note the full endpoint address

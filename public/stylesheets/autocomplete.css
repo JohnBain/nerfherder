@@ -7,14 +7,15 @@
 
 .autocomplete input{
   font-size: 1.2em;
-  width: 100%;
+  width: 60%;
   padding:0.4em;
+  color: black;
 }
 
 .autocomplete ul{
   position: absolute;
   left: 0;
-  width: 100%;
+  width: 30%;
   border-left: 1px solid #888;
   border-right: 1px solid #888;
   border-bottom: 1px solid #888;
@@ -27,6 +28,9 @@
   width: 100%;
   padding:0.4em;
   background-color: #fff;
+  color: black;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .autocomplete li.active{
@@ -36,10 +40,11 @@
 
 .autocomplete .highlight {
   background-color: #E2E2E2;
+  width: 100%;
 }
 
 .autocomplete li.active .highlight {
   background: #666;
-  color: #fff;
+  color: black;
 }
 

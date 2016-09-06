@@ -1,9 +1,12 @@
-I want to meet
-<select name="singleSelect" ng-model="data.singleSelect">
-    <option value="Men">Men</option>
-    <option value="Women">Women</option>
-</select> interested in:
-<input ng-model="tag" />
+<div class="meet-div">
+    I want to meet
+    <select name="singleSelect" ng-model="data.singleSelect">
+        <option value="Men">Men</option>
+        <option value="Women">Women</option>
+    </select> interested in:
+    <autocomplete data="tags" ng-model="tag" />
+</div>
+
 <div class="col-md-offset-1">
     <ul class="list-inline">
         <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag">
