@@ -39,18 +39,46 @@ ul#tags li {
 .meet-div {
 	background-color: #104da1;
 	color: #e4edfd;
-	width: 30em;
-	border-radius: .3em;
+	border-radius: .2em;
+        border-bottom: .1px solid black;
 }
 
 .col-md-4 {
-	background-color: black;
+}
+
+.person {
+	width: 63%;
+	border: 1px solid grey;
+	border-radius: 5px;
+	background-color: #fbfcdd;
+	margin-bottom: 1em;
+	position: relative;
+}
+
+.gender {
+	color: black;
 }
 
 
 body {
-    font-family: "Helvetica Neue", "Helvetica", "Sans Serif"
+    font-family: "Helvetica Neue", "Helvetica", "Sans Serif";
 }
+
+.meet-div {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2c539e+0,2c539e+100;Blue+3D+%232 */
+background: rgb(44,83,158); /* Old browsers */
+background: -moz-linear-gradient(-45deg, rgba(44,83,158,1) 0%, rgba(44,83,158,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c539e', endColorstr='#2c539e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.message {
+	position: absolute;
+	left: 50%;
+	top: 70%;
+}
+
 
 
 /* Modal stuff */
@@ -96,4 +124,81 @@ body {
         width: 50%;
         padding: 30px;
     }
+}
+
+
+/*navbar*/
+
+.container-fluid {
+	background-color: #104da1
+}
+.navbar-inverse {
+  background-color: #104da1;
+  border-color: #104da1;
+  border-radius: 0px;
+}
+.navbar-inverse .navbar-brand {
+  color: #ecf0f1;
+}
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color: #cccccc;
+}
+.navbar-inverse .navbar-text {
+  color: #ecf0f1;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #ecf0f1;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #cccccc;
+}
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  color: #cccccc;
+  background-color: #1459b8;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  color: #cccccc;
+  background-color: #1459b8;
+}
+.navbar-inverse .navbar-toggle {
+  border-color: #1459b8;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+  background-color: #1459b8;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #ecf0f1;
+}
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #ecf0f1;
+}
+.navbar-inverse .navbar-link {
+  color: #ecf0f1;
+}
+.navbar-inverse .navbar-link:hover {
+  color: #cccccc;
+}
+
+@media (max-width: 767px) {
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #cccccc;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #cccccc;
+    background-color: #1459b8;
+  }
 }

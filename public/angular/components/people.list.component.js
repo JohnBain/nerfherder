@@ -11,6 +11,7 @@
 
                 //that.people will be undefined if we try to log it here (due to asynchronicity), but this works
 
+                //Tags for autocomplete dropdown in tag search:
                 //v this is a bad practice but it shoehorns two "controllers" into one
                 uniqueTagService.tags().then(function success(res) {
                     $scope.tags = res.data;
