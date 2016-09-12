@@ -1,17 +1,18 @@
 <div class="meet-div">
     I want to meet
-    <select name="singleSelect" class="gender" ng-model="data.singleSelect">
-        <option class="gender" value="Men">Men</option>
-        <option class="gender" value="Women">Women</option>
+    <select name="singleSelect" class="gender" ng-model="gender">
+        <option class="gender" value="M">Men</option>
+        <option class="gender" value="F">Women</option>
     </select> interested in:
     <autocomplete data="tags" ng-model="tag" />
 </div>
 <div class="col-md-offset-1">
     <ul class="list-inline">
-        <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag">
+        <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag | genderSelect: gender">
             <div class="person">
+            <!--Elements within the person div should be refactored as Bootstrap cols-->
                 <img src="{{person.img_resources[0]}}" / class="thumbnail" alt="Oops">
-                <span><a href='profile/{{person.username}}'>{{person.username}}</a></span>
+                <span><a ui-sref='profile({username: person.username})'>{{person.username}}</a></span>
                 <p>{{person.age}}/{{person.gender}} <button type="button" class="btn-success message">Message me</button></p> 
                 <ul class="list-inline ">
                     <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>
