@@ -18,7 +18,7 @@ angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAuto
     var aboutState = {
         name: 'about',
         url: '/about',
-        template: '<h3>Welcome to the about page,{{ $user }} </h3>',
+        template: '<h3>Welcome to the about page,{{ user }} </h3>',
         //just a small demonstration of resolves. Resolve (re)loads data on state (re)load.
         resolve: {
             user: function($stateParams) {

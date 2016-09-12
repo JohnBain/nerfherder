@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var jwt = require('express-jwt');
-
+var auth = jwt({
+	secret: process.env.JWT_SECRET,
+	userProperty: 'payload'
+})
 
 
 /* GET home page. */
@@ -19,6 +22,10 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.get('/profile/*', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+router.get('/about', auth, function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
