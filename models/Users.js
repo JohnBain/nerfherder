@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 
 var userSchema = new mongoose.Schema({
     username: {
@@ -7,10 +8,12 @@ var userSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    password: {
+    email: {
         type: String,
-        required: true
+        unique: true,
     },
+    hash: String,
+    salt: String,
     gender: {
         type: String,
         required: true,
@@ -26,73 +29,33 @@ var userSchema = new mongoose.Schema({
     img_resources: Array,
     location_info: Object,
     bio: String,
-    created_on: {type: Date, default: Date.now}
+    created_on: { type: Date, default: Date.now }
 });
 
-//"pre" is a middleware affecting the save function.
-//All we're doing here is encrypting the password given to us in the signup form.
+userSchema.methods.generateJwt = function() {
+    var expiry = new Date();
+    expiry.setDate(expiry.getDate() + 7); // this is when our JWT expires
 
-userSchema.pre('save', function(next) {
-    var user = this;
-    if (this.isModified('password') || this.isNew) {
-        bcrypt.genSalt(10, function(err, salt) {
-            if (err) {
-                return next(err);
-            }
-            bcrypt.hash(user.password, salt, function(err, hash) {
-                if (err) {
-                    return next(err);
-                }
-                user.password = hash;
-                next();
-            });
-        });
-    } else {
-        return next();
-    }
-});
+    return jwt.sign({
+        _id: this._id,
+        username: this.username,
+        email: this.email,
+        age: this.age,
+        gender: this.gender,
+        exp: parseInt(expiry.getTime() / 1000), //UNIX time in seconds
+    }, process.env.JWT_SECRET); //secret used by hash algorithm
 
-//lowercase tags
-
-userSchema.pre('save', function(next) {
-    var user = this;
-    var x = user.tags.map(t => t.toLowerCase());
-    console.log(x);
-    user.tags = x;
-    next();
-})
-
-//we will use this to de-hash the password given at login and check if it matches
-
-userSchema.methods.comparePassword = function(passw, cb) {
-    bcrypt.compare(passw, this.password, function(err, isMatch) {
-        if (err) {
-            return cb(err);
-        }
-        cb(null, isMatch);
-    });
 };
 
+userSchema.methods.setPassword = function(password) {
+    this.salt = crypto.randomBytes(16).toString('hex'); //Create a random string for salt
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex')
+        //doing it this way keeps us from having a password in the databse in any form
+}
+
+userSchema.methods.validPassword = function(password) {
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    return this.hash === hash //returns a boolean telling us if password is valid
+}
+
 module.exports = mongoose.model('User', userSchema);
-
-/*
-            name: 'surf_boarder',
-            age: 32,
-            gender: 'M',
-            tags: ['surfing', 'online dating', 'fantasy'],
-            default_img: '',
-            location_text: '',
-            img_resources: ['public/images/man.jpg'],
-            location_info: { lat: -34.397, lng: 150.644 }
-*/
-
-/* username: String,
-password: String,
-gender: String,
-tags: Array,
-img_resources: Array,
-location_info: Object,
-about: String,
-what_im_doing: String,
-miscellaneous_nerdery: String
-*/

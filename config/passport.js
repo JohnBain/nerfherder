@@ -1,22 +1,26 @@
-var JwtStrategy = require('passport-jwt').Strategy;
- 
-// load up the user model
-var User = require('../models/Users');
-var config = require('database'); // get db config file
- 
-module.exports = function(passport) {
-  var opts = {};
-  opts.secretOrKey = config.secret;
-  passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findOne({id: jwt_payload.id}, function(err, user) {
-          if (err) {
-              return done(err, false);
-          }
-          if (user) {
-              done(null, user);
-          } else {
-              done(null, false);
-          }
-      });
-  }));
-};
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
+var User = require('../models/Users.js')
+
+passport.use(new LocalStrategy({
+    usernameField: 'email' //smarter to base it on emails instead of usernames 
+  },
+  function(username, password, done) {
+    User.findOne({ email: username }, function (err, user) { //searches DB for user with this address
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, {
+          message: 'Incorrect username.'  //no user, return message
+        });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, {
+          message: 'Incorrect password.'  //wrong password, return message
+        });
+      }
+      return done(null, user);
+    });
+  }
+));
+

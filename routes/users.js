@@ -122,6 +122,7 @@ router.delete('/', function(req, res) {
     })
 })
 
+/*old signup method
 
 router.post('/signup', function(req, res) {
     console.log("successfully got in");
@@ -144,7 +145,8 @@ router.post('/signup', function(req, res) {
                 newUser.img_resources = JSON.parse(newUser.img_resources)
                 newUser.tags = JSON.parse(newUser.tags)*/
 
-        // save the user
+// save the user
+/*
         newUser.save(function(err) {
             if (err) {
                 console.log(err, 'error on save');
@@ -153,41 +155,70 @@ router.post('/signup', function(req, res) {
             res.json({ success: true, msg: 'Successfully created new user.' });
         });
     }
-});
+}); 
+*/
 
-router.get('/memberinfo', passport.authenticate('jwt', { session: false }), function(req, res) {
-    var token = getToken(req.headers);
-    if (token) {
-        var decoded = jwt.decode(token, config.secret);
-        User.findOne({
-            name: decoded.name
-        }, function(err, user) {
-            if (err) throw err;
 
-            if (!user) {
-                return res.status(403).send({ success: false, msg: 'Authentication failed. User not found.' });
-            } else {
-                res.json({ success: true, msg: 'Welcome in the member area ' + user.name + '!' });
-            }
+var register = function(req, res) {
+    if (!req.body.username || !req.body.email || !req.body.password) {
+        res.send({
+            "message": "All fields required"
         });
-    } else {
-        return res.status(403).send({ success: false, msg: 'No token provided.' });
+        return;
     }
-});
 
-getToken = function(headers) {
-    if (headers && headers.authorization) {
-        var parted = headers.authorization.split(' ');
-        if (parted.length === 2) {
-            return parted[1];
+    var user = new User();
+    user.username = req.body.username;
+    user.email = req.body.email;
+    user.gender = req.body.gender;
+    user.age = req.body.age;
+    console.log('working');
+
+    //set values for all forms
+
+    user.setPassword(req.body.password);
+
+    user.save(function(err) {
+        console.log(user)
+        var token;
+        if (err) {
+            res.send('error here');
         } else {
-            return null;
+            token = user.generateJwt();
+            res.send( {
+                "token": token
+            });
         }
-    } else {
-        return null;
-    }
+    });
 };
 
+var login = function(req, res) {
+    if (!req.body.email || !req.body.password) {
+        res.send({
+            "message": "All fields required"
+        });
+        return;
+    }
+
+    passport.authenticate('local', function(err, user, info) {
+        var token;
+
+        if (err) {
+            res.send('error');
+            return;
+        }
+
+        if (user) {
+            token = user.generateJwt();
+            res.send({"token": token})
+        } else {
+            res.send('error')
+        }
+    })(req, res);
+}
+
+router.post('/register', register)
+router.post('/login', login)
 
 /*
 
