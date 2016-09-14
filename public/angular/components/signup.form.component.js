@@ -1,6 +1,6 @@
 angular.module('datingApp').component('signupForm', {
     templateUrl: '/public/templates/signup.html',
-    controller: function signupCtrl($scope, $http) {
+    controller: function signupCtrl($scope, $window, $location, authentication) {
         //using an immediate function to generate ages 18-99
         $scope.ages = (function() {
             var arr = [];
@@ -10,22 +10,24 @@ angular.module('datingApp').component('signupForm', {
             return arr
         }());
 
+        $scope
 
         $scope.formInfo = {};
+        $scope.errMessage = '';
 
-        $scope.formInfo.tags = ["asd"]
+        $scope.formInfo.tags = ["asd"];
 
+        $scope.returnPage = $location.search().page || '/';
 
         $scope.saveData = function() {
             $scope.nameRequired = '';
             $scope.passwordRequired = '';
             $scope.ageRequired = '';
             $scope.genderRequired = '';
-            $scope.formInfo.img_resources = ["public/images/woman1.jpg"];
-            $scope.formInfo.location_info = { lat: $scope.details.geometry.location.lat(), long: $scope.details.geometry.location.lng() }
-
-            /*var myTags = $scope.formInfo.tags.split(",").map(t => t = t.trim())*/
-
+            $scope.emailRequired = '';
+            $scope.formInfo.img_resources = ["./public/images/woman1.jpg"];
+            $scope.formInfo.location_info = { lat: $scope.details.geometry.location.lat(), long: $scope.details.geometry.location.lng() };
+            /*$scope.myTags = $scope.formInfo.tags.split(",").map(t => t = t.trim())*/
 
             if (!$scope.formInfo.name) {
                 $scope.nameRequired = 'Username Required';
@@ -48,28 +50,19 @@ angular.module('datingApp').component('signupForm', {
             /*if ($scope.formInfo.location) {*/
             var x = $scope.formInfo;
 
+            authentication.register(x).then(function(data) {
+                authentication.saveToken(data.data.token);
+                console.log(data.data);
+                console.log($window.localStorage);
+                /*console.log("user saved. user data: " + JSON.stringify(data));*/
+                //JSON.stringify(x) helps you figure out what [object Object] is
+                $location.search('page', null);
+                $location.path($scope.returnPage);
 
-            console.log(x);
-            var req = {
-                method: 'POST',
-                url: '/users/signup',
-                data: x
-            }
-
-            /*
-
-            transformRequest: function(obj) {
-                    var str = [];
-                    for (var p in obj) {
-                        if (p === 'location_info') {
-                            Object.keys(obj['location_info']).forEach(p => str.push('location_info[' + encodeURIComponent(p) + ']' + "=" + encodeURIComponent(obj['location_info'][p])));
-                        } else
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    }
-                    return str.join("&");
-                },*/
-
-            $http(req).then(function() { console.log("user saved") }, function() { console.log("failure") });
+            }, function() {
+                console.log("failure")
+                $scope.errMessage = "Something went wrong";
+            });
 
             /*}*/
 

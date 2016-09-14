@@ -1,0 +1,89 @@
+[33mcommit 9652a8abe7587f4a184af03fd4c8605b9dc5d800[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Mon Sep 12 19:29:05 2016 -0400
+
+    Login route returns JWT
+
+[33mcommit d94dae1c78e7811399c35f4aae9492063ad6a5d9[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Sun Sep 11 23:16:18 2016 -0400
+
+    Halfway through building auth
+
+[33mcommit 16e7c283526c5ee9759898e09a9ac86868ab3ebe[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Sun Sep 11 21:31:14 2016 -0400
+
+    Before breaking everything
+
+[33mcommit 76eaf5abd5b443c35493e1660d960481e3996c8c[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Wed Sep 7 15:07:53 2016 -0400
+
+    Before gutting authentication system
+
+[33mcommit f4f3e297dd4a1f1249de20b57237bb4b3e6582af[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Tue Sep 6 00:28:39 2016 -0400
+
+    Cleaning house
+
+[33mcommit 317ffef20bb2fa755322152cb9b00eb687673752[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Tue Sep 6 00:28:22 2016 -0400
+
+    Cleaning house
+
+[33mcommit 16a6df3d2f745955be4c9f15a15878fb3ddafcda[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Mon Sep 5 20:53:35 2016 -0400
+
+    Adding autocomplete
+
+[33mcommit f5fecb746448b4abddb45638c86e41c81473fb12[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Sat Sep 3 20:58:22 2016 -0400
+
+    another commit
+
+[33mcommit c5e5268259e7976ae920b613eb6e822ca790627d[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Wed Aug 31 05:25:34 2016 -0400
+
+    Another
+
+[33mcommit 4b3192eef4fdd5a6bafe8af5fb75980ab5a571aa[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Fri Aug 12 23:10:28 2016 -0400
+
+    Registration works
+
+[33mcommit 89f2122b1428d33b9b71b03644ba0d2656891836[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Sat Aug 6 10:57:03 2016 -0400
+
+    Before utilizing tagService
+
+[33mcommit 80d6b57c3430d1ccaa94611cf7d8193353985fbd[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Tue Aug 2 22:08:01 2016 -0400
+
+    Added oneUserService and profile
+
+[33mcommit 8934fe0d3f9f1f4459f001463c26d39226c26625[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Tue Aug 2 09:12:35 2016 -0400
+
+    first commit, everything working
+
+[33mcommit 92195923049c9886779c6c6c25dbfedde43f97c1[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Tue Aug 2 09:12:20 2016 -0400
+
+    gitignore
+
+[33mcommit b1fba99e4b6a9f52a7149a2ca843cb76cf038f6e[m
+Author: John Bain <jbainschool@gmail.com>
+Date:   Tue Aug 2 09:10:51 2016 -0400
+
+    gitignore

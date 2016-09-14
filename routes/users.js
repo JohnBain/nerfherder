@@ -171,7 +171,7 @@ var register = function(req, res) {
     user.username = req.body.username;
     user.email = req.body.email;
     user.gender = req.body.gender;
-    user.age = req.body.age;
+    user.age = req.body.age;    //Bad practice -- this is all in JWT -- but good enough for a demo.
     console.log('working');
 
     //set values for all forms

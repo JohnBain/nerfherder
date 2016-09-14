@@ -5,19 +5,35 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a ui-sref="home">Browse</a></li>
-            <li><a href="#">My Profile</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Explore Tags <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="tag in tags">
+                        <a href="#"> {{ tag }} </a href="#">
+          </ul>
+        </li>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a ui-sref="about">About Us</a></li>
-            <li><a ui-sref="login">Login</a></li>
-            <li>
-                <div class="btn-nav"><a class="btn btn-primary btn-small navbar-btn" ui-sref="signup">Sign up!</a></div>
-            </li>
-        </ul>
+            <li ng-hide="isLoggedIn"><a ui-sref="login">Login</a></li>
+                    <li ng-hide="isLoggedIn">
+                        <div class="btn-nav"><a class="btn btn-primary btn-small navbar-btn" ui-sref="signup">Sign up!</a></div>
+                    </li>
+                    <li ng-show="isLoggedIn" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ myUsername }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">My profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
     </div>
 </nav>
 
-<nav class="navbar navbar-inverse">
+
+<!-- 
+<nav class="navbar navbar-inverse" id="deprecated-tag-display">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li><a href="#">Popular Tags:</a></li>
@@ -26,3 +42,4 @@
        </li>
   </div>
   </nav>
+  -->
