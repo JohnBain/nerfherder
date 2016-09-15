@@ -66,8 +66,8 @@ angular.module('datingApp').component('signupForm', {
 
             authentication.register(x).then(function(data) {
                 authentication.saveToken(data.data.token);
-                console.log(data.data);
-                console.log($window.localStorage);
+                /*console.log(data.data);
+                console.log($window.localStorage);*/
                 /*console.log("user saved. user data: " + JSON.stringify(data));*/
                 //JSON.stringify(x) helps you figure out what [object Object] is
                 $location.search('page', null);
