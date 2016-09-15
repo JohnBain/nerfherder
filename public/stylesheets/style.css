@@ -73,12 +73,13 @@ background: linear-gradient(135deg, rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%)
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c539e', endColorstr='#2c539e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+/*
 .message {
-	position: absolute;
+  float: right;
 	left: 50%;
 	top: 70%;
 }
-
+*/
 
 
 /* Modal stuff */

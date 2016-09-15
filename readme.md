@@ -20,4 +20,6 @@ A MEAN stack app demonstrating:
 
 Attributions:
 
-* Allmighty Autocomplete
+* Allmighty Autocomplete https://github.com/JustGoscha/allmighty-autocomplete
+
+* Angular Modal Service http://dwmkerr.github.io/angular-modal-service/

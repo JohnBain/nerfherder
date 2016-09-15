@@ -1,4 +1,4 @@
-angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAutocomplete', 'ui.router', 'autocomplete', 'ui.bootstrap'])
+angular.module('datingApp', ['core', 'datingApp.services', 'ngResource', 'ngAutocomplete', 'ui.router', 'autocomplete', 'ui.bootstrap', 'angularModalService'])
 
 .config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 

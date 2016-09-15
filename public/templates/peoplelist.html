@@ -10,14 +10,24 @@
     <ul class="list-inline">
         <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag | genderSelect: gender">
             <div class="person">
-            <!--Elements within the person div should be refactored as Bootstrap cols-->
-                <img src="{{person.img_resources[0]}}" / class="thumbnail" alt="Oops">
-                <span><a ui-sref='profile({username: person.username})'>{{person.username}}</a></span>
-                <p>{{person.age}}/{{person.gender}} <button type="button" class="btn-success message">Message me</button></p> 
-                <ul class="list-inline ">
-                    <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>
-                    <p>&nbsp;...and {{person.tags.length}} more</p>
+                <!--Elements within the person div should be refactored as Bootstrap cols-->
+                <div class="col-12"><img src="{{person.img_resources[0]}}" / class="thumbnail img-responsive" alt="Oops"></div>
+                <div class="col-6">
+                    <span><a ui-sref='profile({username: person.username})'>{{person.username}}</a></span>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn-success message">Message me</button>
+                </div>
+                <div class="col-12">
+                    <span>{{person.age}}/{{person.gender}}</span>
+                </div>
+                <div class="col-12">
+                    <ul class="list-inline ">
+                        <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>
+                        <p>&nbsp;...and {{person.tags.length}} more</p>
+                </div>
             </div>
-            </ul>
-        </li>
-    </ul>
+</div>
+</ul>
+</li>
+</ul>

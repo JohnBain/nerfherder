@@ -10,12 +10,18 @@ angular.module('datingApp').component('signupForm', {
             return arr
         }());
 
+        $scope.genders = (function() {
+            return ['M', 'F']; //weird bug, if I declare this as a simple array it whites out when I first select
+        }());
+
         $scope
 
         $scope.formInfo = {};
         $scope.errMessage = '';
 
         $scope.formInfo.tags = ["asd"];
+        $scope.formInfo.img_resources = ["public/images/woman1.jpg"];
+
 
         $scope.returnPage = $location.search().page || '/';
 
@@ -25,7 +31,6 @@ angular.module('datingApp').component('signupForm', {
             $scope.ageRequired = '';
             $scope.genderRequired = '';
             $scope.emailRequired = '';
-            $scope.formInfo.img_resources = ["./public/images/woman1.jpg"];
             $scope.formInfo.location_info = { lat: $scope.details.geometry.location.lat(), long: $scope.details.geometry.location.lng() };
             /*$scope.myTags = $scope.formInfo.tags.split(",").map(t => t = t.trim())*/
 
@@ -47,8 +52,17 @@ angular.module('datingApp').component('signupForm', {
                 $scope.genderRequired = 'Gender Required';
             }
 
+
             /*if ($scope.formInfo.location) {*/
             var x = $scope.formInfo;
+            if (x.gender === 'M'){
+                x.img_resources = ["public/images/man.jpg"];
+            }
+            else {
+                x.img_resources = ["public/images/woman1.jpg"];
+            }
+
+            console.log(x);
 
             authentication.register(x).then(function(data) {
                 authentication.saveToken(data.data.token);

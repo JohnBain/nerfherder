@@ -23,7 +23,7 @@
     <div class="form-group">
         <label for="inputGender3" class="col-sm-2 control-label">Gender</label>
         <div class="col-sm-4">
-            <input class="form-control" placeholder="Gender" ng-model="formInfo.gender">
+            <select ng-model="formInfo.gender" ng-options="x for x in genders"></select>
             <span ng-show="genderRequired">{{genderRequired}}</span>
         </div>
     </div>
