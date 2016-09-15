@@ -43,11 +43,8 @@ ul#tags li {
         border-bottom: .1px solid black;
 }
 
-.col-md-4 {
-}
-
 .person {
-	width: 63%;
+  width: 63%;
 	border: 1px solid grey;
 	border-radius: 5px;
 	background-color: #fbfcdd;

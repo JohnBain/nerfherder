@@ -11,23 +11,62 @@
         <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag | genderSelect: gender">
             <div class="person">
                 <!--Elements within the person div should be refactored as Bootstrap cols-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="{{person.img_resources[0]}}" / class="thumbnail img-responsive" alt="Oops">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span><a ui-sref='profile({username: person.username})'>{{person.username}}</a></span> {{person.age}}/{{person.gender}}
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn-success message">Message me</button>
+                    </div>
+                </div>
+                <ul class="list-inline ">
+                    <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>
+                    <p>&nbsp;...and {{person.tags.length}} more</p>
+                </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<!--
+<div class="meet-div">
+    I want to meet
+    <select name="singleSelect" class="gender" ng-model="gender">
+        <option class="gender" value="M">Men</option>
+        <option class="gender" value="F">Women</option>
+    </select> interested in:
+    <autocomplete data="tags" ng-model="tag" />
+</div>
+<div class="col-md-offset-1 container">
+    <ul class="list-inline row">
+        <li class="col-md-4" ng-repeat="person in $ctrl.people | tagSearch: tag | genderSelect: gender">
+            <div class="row">
                 <div class="col-12"><img src="{{person.img_resources[0]}}" / class="thumbnail img-responsive" alt="Oops"></div>
-                <div class="col-6">
+            </div>
+            <div class="row">
+                <div class="col-md-3">
                     <span><a ui-sref='profile({username: person.username})'>{{person.username}}</a></span>
                 </div>
-                <div class="col-6">
+                <div class="col-md-5">
                     <button type="button" class="btn-success message">Message me</button>
                 </div>
-                <div class="col-12">
+            </div>
+            <div class="row">
+                <div class="col-md-3">
                     <span>{{person.age}}/{{person.gender}}</span>
                 </div>
-                <div class="col-12">
-                    <ul class="list-inline ">
-                        <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>
-                        <p>&nbsp;...and {{person.tags.length}} more</p>
-                </div>
+            </div>
+            <div class="col-12">
+                <ul class="list-inline ">
+                    <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>
+                    <p>&nbsp;...and {{person.tags.length}} more</p>
             </div>
 </div>
 </ul>
 </li>
 </ul>
+-->
