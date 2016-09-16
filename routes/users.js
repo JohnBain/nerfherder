@@ -8,6 +8,7 @@ var jwt = require('jwt-simple');
 var passport = require('passport');
 
 mongoose.connect('mongodb://heroku_hmk0c5t1:j7gk0ed2fn3iejgmjbm30e0j1d@ds033076.mlab.com:33076/heroku_hmk0c5t1');
+
 /*
 mongoose.connect('mongodb://localhost/users');
 */
