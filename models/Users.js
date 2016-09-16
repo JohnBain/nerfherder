@@ -41,8 +41,7 @@ userSchema.methods.generateJwt = function() {
         username: this.username,
         email: this.email,
         age: this.age,
-        gender: this.gender,
-        tags: this.tags,
+        gender: this.gender
         exp: parseInt(expiry.getTime() / 1000), //UNIX time in seconds
     }, process.env.JWT_SECRET); //secret used by hash algorithm
 
