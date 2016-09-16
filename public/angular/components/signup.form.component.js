@@ -19,8 +19,7 @@ angular.module('datingApp').component('signupForm', {
         $scope.formInfo = {};
         $scope.errMessage = '';
 
-        $scope.formInfo.tags = ["star wars", "swimming", "pizza", "video games"];
-        $scope.formInfo.img_resources = ["/public/images/woman.jpg"];
+        $scope.formInfo.tags = ["star trek", "horses", "pizza", "video games"];
 
 
         $scope.returnPage = $location.search().page || '/';
@@ -56,7 +55,7 @@ angular.module('datingApp').component('signupForm', {
             /*if ($scope.formInfo.location) {*/
             var x = $scope.formInfo;
             if (x.gender === 'M'){
-                x.img_resources = ["public/images/man.jpg"];
+                x.img_resources = ["public/images/man2.jpg"];
             }
             else {
                 x.img_resources = ["public/images/woman1.jpg"];

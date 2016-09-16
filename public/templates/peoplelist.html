@@ -25,7 +25,7 @@
                 </div>
                 <ul class="list-inline ">
                     <li ng-repeat="tag in person.tags | limitTo: 3">{{tag}}</li>
-                    <p>&nbsp;...and {{person.tags.length}} more</p>
+                    <p>&nbsp;...and {{person.tags.length - 3}} more</p>
                 </ul>
         </li>
     </ul>
