@@ -20,7 +20,7 @@ angular.module('datingApp').component('signupForm', {
         $scope.errMessage = '';
 
         $scope.formInfo.tags = ["crocheting, sewing, Warhammer"];
-        $scope.formInfo.img_resources = ["public/images/woman1.jpg"];
+        $scope.formInfo.img_resources = ["/public/images/woman1.jpg"];
 
 
         $scope.returnPage = $location.search().page || '/';
@@ -31,7 +31,7 @@ angular.module('datingApp').component('signupForm', {
             $scope.ageRequired = '';
             $scope.genderRequired = '';
             $scope.emailRequired = '';
-            $scope.formInfo.location_info = { lat: $scope.details.geometry.location.lat(), long: $scope.details.geometry.location.lng() };
+            //$scope.formInfo.location_info = { lat: $scope.details.geometry.location.lat(), long: $scope.details.geometry.location.lng() };
             /*$scope.myTags = $scope.formInfo.tags.split(",").map(t => t = t.trim())*/
 
             if (!$scope.formInfo.name) {

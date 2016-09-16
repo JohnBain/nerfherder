@@ -7,11 +7,12 @@ var User = require('../models/Users.js');
 var jwt = require('jwt-simple');
 var passport = require('passport');
 
-mongoose.connect('mongodb://heroku_hmk0c5t1:j7gk0ed2fn3iejgmjbm30e0j1d@ds033076.mlab.com:33076/heroku_hmk0c5t1');
 
-/*
+//mongoose.connect('mongodb://heroku_hmk0c5t1:j7gk0ed2fn3iejgmjbm30e0j1d@ds033076.mlab.com:33076/heroku_hmk0c5t1');
+
+
 mongoose.connect('mongodb://localhost/users');
-*/
+
 
 router.get('/', function(req, res, next) {
     User.find(function(err, users) {
@@ -174,7 +175,9 @@ var register = function(req, res) {
     user.username = req.body.username;
     user.email = req.body.email;
     user.gender = req.body.gender;
-    user.age = req.body.age;    //Bad practice -- this is all in JWT -- but good enough for a demo.
+    user.age = req.body.age;
+    user.tags = req.body.tags;
+    user.img_resources = req.body.img_resources;    //Bad practice -- this is all in JWT -- but good enough for a demo.
     console.log('working');
 
     //set values for all forms
