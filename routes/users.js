@@ -10,10 +10,10 @@ var jwt = require('jwt-simple');
 var passport = require('passport');
 
 
-//mongoose.connect('mongodb://heroku_jpt67h81:ef3p01fnvoehejgh7qmqt9adlp@ds033116.mlab.com:33116/heroku_jpt67h81');
+mongoose.connect('mongodb://heroku_jpt67h81:ef3p01fnvoehejgh7qmqt9adlp@ds033116.mlab.com:33116/heroku_jpt67h81');
 
 
-mongoose.connect('mongodb://localhost/users');
+//mongoose.connect('mongodb://localhost/users');
 
 
 router.get('/', function(req, res, next) {
@@ -180,6 +180,7 @@ var register = function(req, res) {
     user.gender = req.body.gender;
     user.age = req.body.age;
     user.tags = req.body.tags;
+    user.img_resources = req.body.img_resources;
     console.log('working');
 
     //set values for all forms

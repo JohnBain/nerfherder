@@ -56,7 +56,7 @@ angular.module('datingApp').component('signupForm', {
             /*if ($scope.formInfo.location) {*/
             var x = $scope.formInfo;
             if (x.gender === 'M'){
-                x.img_resources = ["public/images/man.jpg"];
+                x.img_resources = ["public/images/man2.jpg"];
             }
             else {
                 x.img_resources = ["public/images/woman1.jpg"];
