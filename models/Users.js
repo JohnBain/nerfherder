@@ -25,7 +25,7 @@ var userSchema = new mongoose.Schema({
         min: 18,
         max: 99
     },
-    tags: ['sewing', 'exercise', 'warhammer', 'final fantasy', 'video games'],
+    tags: Array,
     img_resources: Array,
     location_info: Object,
     bio: String,
@@ -42,6 +42,7 @@ userSchema.methods.generateJwt = function() {
         email: this.email,
         age: this.age,
         gender: this.gender,
+        tags: this.tags,
         exp: parseInt(expiry.getTime() / 1000), //UNIX time in seconds
     }, process.env.JWT_SECRET); //secret used by hash algorithm
 
