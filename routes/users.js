@@ -1,3 +1,5 @@
+/*ADD TOLOWERCASE BACK WHEN YOU HAVE STUFF IN DB!*/
+
 var express = require('express');
 var router = express.Router();
 
@@ -8,10 +10,10 @@ var jwt = require('jwt-simple');
 var passport = require('passport');
 
 
-//mongoose.connect('mongodb://heroku_hmk0c5t1:j7gk0ed2fn3iejgmjbm30e0j1d@ds033076.mlab.com:33076/heroku_hmk0c5t1');
+mongoose.connect('mongodb://heroku_hmk0c5t1:j7gk0ed2fn3iejgmjbm30e0j1d@ds033076.mlab.com:33076/heroku_hmk0c5t1');
 
 
-mongoose.connect('mongodb://localhost/users');
+//mongoose.connect('mongodb://localhost/users');
 
 
 router.get('/', function(req, res, next) {
@@ -80,7 +82,7 @@ router.get('/tags/fiverandom', function(req, res) {
             function pushFive() {
                 while (counter < 5 && tries > 0) {
                     tries -= 1;
-                    var x = tags[Math.floor(Math.random() * tags.length)].toLowerCase();
+                    var x = tags[Math.floor(Math.random() * tags.length)]/*.toLowerCase();*/
                     if (fiveRand.indexOf(x) != -1) {
                         pushFive();
                     } else {
