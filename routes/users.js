@@ -180,7 +180,6 @@ var register = function(req, res) {
     user.gender = req.body.gender;
     user.age = req.body.age;
     user.tags = req.body.tags;
-    user.img_resources = req.body.img_resources; //Bad practice -- this is all in JWT -- but good enough for a demo.
     console.log('working');
 
     //set values for all forms
