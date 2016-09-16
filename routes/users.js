@@ -82,7 +82,7 @@ router.get('/tags/fiverandom', function(req, res) {
             function pushFive() {
                 while (counter < 5 && tries > 0) {
                     tries -= 1;
-                    var x = tags[Math.floor(Math.random() * tags.length)].toLowerCase();
+                    var x = tags[Math.floor(Math.random() * tags.length)]/*.toLowerCase();*/
                     if (fiveRand.indexOf(x) != -1) {
                         pushFive();
                     } else {
