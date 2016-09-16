@@ -113,6 +113,18 @@ router.get('/:username', function(req, res) {
     })
 });
 
+router.get('/deleteall', function(req, res) {
+    User.remove({}, function(err, result) {
+        if (err) {
+            console.log(req.body, 'body')
+            res.status(500)
+            res.send(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
+
 router.delete('/', function(req, res) {
     console.log(req.body.sending, 'body');
     console.log(req.params, 'params');
@@ -179,7 +191,7 @@ var register = function(req, res) {
     user.gender = req.body.gender;
     user.age = req.body.age;
     user.tags = req.body.tags;
-    user.img_resources = req.body.img_resources;    //Bad practice -- this is all in JWT -- but good enough for a demo.
+    user.img_resources = req.body.img_resources; //Bad practice -- this is all in JWT -- but good enough for a demo.
     console.log('working');
 
     //set values for all forms
@@ -193,7 +205,7 @@ var register = function(req, res) {
             res.send('error here');
         } else {
             token = user.generateJwt();
-            res.send( {
+            res.send({
                 "token": token
             });
         }
@@ -218,7 +230,7 @@ var login = function(req, res) {
 
         if (user) {
             token = user.generateJwt();
-            res.send({"token": token})
+            res.send({ "token": token })
         } else {
             res.send('error')
         }
