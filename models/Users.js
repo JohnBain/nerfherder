@@ -25,7 +25,7 @@ var userSchema = new mongoose.Schema({
         min: 18,
         max: 99
     },
-    tags: ['eating', 'drinking', 'warhammer', 'final fantasy'],
+    tags: ['sewing', 'exercise', 'warhammer', 'final fantasy', 'video games'],
     img_resources: Array,
     location_info: Object,
     bio: String,

@@ -10,7 +10,7 @@ var jwt = require('jwt-simple');
 var passport = require('passport');
 
 
-mongoose.connect('mongodb://heroku_hmk0c5t1:j7gk0ed2fn3iejgmjbm30e0j1d@ds033076.mlab.com:33076/heroku_hmk0c5t1');
+mongoose.connect('mongodb://heroku_jpt67h81:ef3p01fnvoehejgh7qmqt9adlp@ds033116.mlab.com:33116/heroku_jpt67h81');
 
 
 //mongoose.connect('mongodb://localhost/users');
@@ -113,17 +113,6 @@ router.get('/:username', function(req, res) {
     })
 });
 
-router.get('/deleteall', function(req, res) {
-    User.remove({}, function(err, result) {
-        if (err) {
-            console.log(req.body, 'body')
-            res.status(500)
-            res.send(err)
-        } else {
-            res.send(result)
-        }
-    })
-})
 
 router.delete('/', function(req, res) {
     console.log(req.body.sending, 'body');
