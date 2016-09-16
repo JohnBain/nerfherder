@@ -19,8 +19,8 @@ angular.module('datingApp').component('signupForm', {
         $scope.formInfo = {};
         $scope.errMessage = '';
 
-        $scope.formInfo.tags = ["crocheting, sewing, Warhammer"];
-        $scope.formInfo.img_resources = ["/public/images/woman1.jpg"];
+        $scope.formInfo.tags = ["swimming, eating, pizza, Final Fantasy, crocheting"];
+        $scope.formInfo.img_resources = ["/public/images/man.jpg"];
 
 
         $scope.returnPage = $location.search().page || '/';
