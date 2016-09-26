@@ -1,6 +1,6 @@
 angular.module('datingApp').component('signupForm', {
     templateUrl: '/public/templates/signup.html',
-    controller: function signupCtrl($scope, $window, $location, authentication) {
+    controller: function signupCtrl($scope, $window, $location, authentication, uniqueTagService) {
         //using an immediate function to generate ages 18-99
         $scope.ages = (function() {
             var arr = [];
@@ -9,6 +9,10 @@ angular.module('datingApp').component('signupForm', {
             }
             return arr
         }());
+
+        uniqueTagService.tags().then(function success(res) {
+            $scope.tags = res.data;
+        })
 
         $scope.genders = (function() {
             return ['M', 'F']; //weird bug, if I declare this as a simple array it whites out when I first select
@@ -19,9 +23,14 @@ angular.module('datingApp').component('signupForm', {
         $scope.formInfo = {};
         $scope.errMessage = '';
 
-        $scope.formInfo.tags = ["star trek", "lord of the rings", "italian food", "video games"];
-        $scope.formInfo.img_resources = ["/public/images/woman1.jpg"];
+        $scope.usertags;
+        $scope.formInfo.tags = [];
 
+        $scope.addTag = function (){
+            $scope.formInfo.tags.push($scope.usertags)
+            $scope.usertags = '';
+        }
+        $scope.formInfo.img_resources = ["/public/images/woman1.jpg"];
 
         $scope.returnPage = $location.search().page || '/';
 
@@ -55,10 +64,9 @@ angular.module('datingApp').component('signupForm', {
 
             /*if ($scope.formInfo.location) {*/
             var x = $scope.formInfo;
-            if (x.gender === 'M'){
+            if (x.gender === 'M') {
                 x.img_resources = ["public/images/man2.jpg"];
-            }
-            else {
+            } else {
                 x.img_resources = ["public/images/woman1.jpg"];
             }
 
