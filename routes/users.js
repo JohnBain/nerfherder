@@ -165,7 +165,6 @@ router.post('/signup', function(req, res) {
 }); 
 */
 
-
 var register = function(req, res) {
     if (!req.body.username || !req.body.email || !req.body.password) {
         res.send({
@@ -246,6 +245,17 @@ router.post('/', function(req, res) {
 })
 
 */
+
+
+User.remove({username: "TestWoman"}, function(err, result) {
+        if (err) {
+            console.log(req.body, 'body')
+            res.status(500)
+            res.send(err)
+        } else {
+            res.send(result)
+        }
+    })
 
 
 /* newDetail.save(function(err) {     //Mongoose models automatically have .save
