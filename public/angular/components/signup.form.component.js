@@ -30,6 +30,7 @@ angular.module('datingApp').component('signupForm', {
             $scope.formInfo.tags.push($scope.usertags)
             $scope.usertags = '';
         }
+        
         $scope.formInfo.img_resources = ["/public/images/woman1.jpg"];
 
         $scope.returnPage = $location.search().page || '/';
