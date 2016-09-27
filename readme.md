@@ -12,8 +12,6 @@ A MEAN stack app demonstrating:
 
 * Google Places autocomplete
 
-* File uploads (front- and back-end)
-
 * Component architecture
 
 * Using Angular services to access CRUD API built with Mongoose and Express
