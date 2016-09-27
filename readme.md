@@ -24,4 +24,4 @@ Attributions:
 
 Author's Note:
 
-* Angular files in public folder. "If the code you wrote a year ago doesn't seem bad to you, you're probably not learning enough."
+* Angular files in public folder. 
